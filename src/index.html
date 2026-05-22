@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LiberPy</title>
+        <link rel="stylesheet" type="text/css" href="./styles.css">  
+        <script src="https://unpkg.com/blockly/blockly.min.js"></script>
+        <!--Google has a free handy-dandy tool called Blockly,
+        which is what the SPIKE Prime and Scratch block-coding tools are based off of-->
+        <script src="blocks.js"></script>
+        <script src="hub_connection.js"></script>
+    </head>
+    <body>
+
+    <div id ="toolbar">
+        <h1>LiberPy Editor</h1>
+        <btn id="sendBtn">Send to Hub</btn>
+        <btn id="codeBtn">See Python code</btn>
+    </div>
+    
+    <div id="blocklyDiv"></div>
+    <!--The Blockly stuff has to take up the rest of the editor, so that's why there's nothing else here-->
+    
+    <script>
+    // We'll probably have a separate JS file for this later, but I don't want to do that right now.
+    document.getElementById('sendBtn').addEventListener('click', async () => {
+  const code = Blockly.Python.workspaceToCode(workspace);
+  if (!code) {
+    alert('No blocks placed yet!');
+    return;
+  }
+  await sendCodeToHub(code);
+});
+    // This is the toolbox for Blockly.
+    // Study it a little bit, and you'll see how Blockly works.
+    const toolbox = {
+      kind: 'categoryToolbox',
+      contents: [
+        {
+          kind: 'category',
+          name: 'Logic',
+          colour: '210',
+          contents: [
+            { kind: 'block', type: 'controls_if' },
+            { kind: 'block', type: 'logic_boolean' },
+          ]
+        },
+        {
+          kind: 'category',
+          name: 'Loops',
+          colour: '120',
+          contents: [
+            { kind: 'block', type: 'controls_repeat_ext' },
+            { kind: 'block', type: 'controls_whileUntil' },
+          ]
+        },
+        {
+          kind: 'category',
+          name: 'Math',
+          colour: '230',
+          contents: [
+            { kind: 'block', type: 'math_number' },
+            { kind: 'block', type: 'math_arithmetic' },
+          ]
+        },
+        {
+        kind: 'category',
+        name: 'SPIKE Prime',
+        colour: '30',
+        contents: [
+        { kind: 'block', type: 'spike_motor_run' },
+        { kind: 'block', type: 'spike_wait' },
+        { kind: 'block', type: 'spike_print' },
+  ]
+},
+        
+    ]
+    };
+
+    const workspace = Blockly.inject('blocklyDiv', {
+      toolbox: toolbox,
+      scrollbars: true,
+      trashcan: false,
+      // I feel like a trash can is ugly and it's not in the SPIKE editor, so I don't want to include it.
+    });
+// This puts Blockly into the workspace. Without it, we have a mostly blank screen.
+
+
+
+    </script>
+    </body>
+</html>

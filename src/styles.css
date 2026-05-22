@@ -1,0 +1,28 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+    #toolbar {
+      background: #1a1a2e;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    #toolbar h1 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+
+    #blocklyDiv {
+      flex: 1;
+      width: 100%;
+    }
+    /*blocklyDiv is for the Blockly stuff, so don't mess with it too much. CSS is screwy enough as it is.*/

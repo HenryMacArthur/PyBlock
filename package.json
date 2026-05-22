@@ -1,0 +1,26 @@
+{
+  "name": "liberpy",
+  "version": "1.0.0",
+  "description": "PyBricks block editor but free",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HenryMacArthur/LiberPy.git"
+  },
+  "keywords": [],
+  
+  "contributors": [
+    "Henry MacArthur <henryemacarthur@gmail.com.>",
+    "Engineering Eagles Robotics Team"
+  ],
+
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/HenryMacArthur/LiberPy/issues"
+  },
+  "homepage": "https://github.com/HenryMacArthur/LiberPy#readme"
+}

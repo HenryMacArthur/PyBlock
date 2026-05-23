@@ -4,23 +4,32 @@
   "description": "PyBricks block editor but free",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite src",
+    "build": "vite build src"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/HenryMacArthur/LiberPy.git"
   },
   "keywords": [],
-  
   "contributors": [
     "Henry MacArthur <henryemacarthur@gmail.com.>",
     "Engineering Eagles Robotics Team"
   ],
-
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
-    "url": "https://github.com/HenryMacArthur/LiberPy/issues"
+    "url": "https://github.com/HenryMacArthur/LiberPy#readme"
   },
-  "homepage": "https://github.com/HenryMacArthur/LiberPy#readme"
+  "homepage": "https://github.com/HenryMacArthur/LiberPy#readme",
+  "devDependencies": {
+    "@pybricks/mpy-cross-v6": "^2.0.0",
+    "vite": "^8.0.14",
+    "vite-plugin-top-level-await": "^1.6.0",
+    "vite-plugin-wasm": "^3.6.0"
+  },
+  "dependencies": {
+    "blockly": "^12.5.1"
+  }
 }

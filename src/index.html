@@ -5,35 +5,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>LiberPy</title>
         <link rel="stylesheet" type="text/css" href="./styles.css">  
-        <script src="https://unpkg.com/blockly/blockly.min.js"></script>
-        <!--Google has a free handy-dandy tool called Blockly,
-        which is what the SPIKE Prime and Scratch block-coding tools are based off of-->
-        <script src="blocks.js"></script>
-        <script src="hub_connection.js"></script>
+        <script type="module" src="main.js"></script>
     </head>
     <body>
 
-    <div id ="toolbar">
-        <h1>LiberPy Editor</h1>
-        <btn id="sendBtn">Send to Hub</btn>
-        <btn id="codeBtn">See Python code</btn>
-    </div>
-    
+<div id="toolbar">
+  <h1>SPIKE Coder</h1>
+  <button id="connectBtn">Connect Hub</button>
+  <button id="sendBtn">send to Hub</button>
+  <button id="codeBtn">See Python</button>
+  <span id="hubStatus" style="margin-left: 12px;">Not connected</span>
+</div>
+
     <div id="blocklyDiv"></div>
     <!--The Blockly stuff has to take up the rest of the editor, so that's why there's nothing else here-->
     
-    <script>
-    // We'll probably have a separate JS file for this later, but I don't want to do that right now.
-    document.getElementById('sendBtn').addEventListener('click', async () => {
-  const code = Blockly.Python.workspaceToCode(workspace);
-  if (!code) {
-    alert('No blocks placed yet!');
-    return;
-  }
-  await sendCodeToHub(code);
-});
-    // This is the toolbox for Blockly.
-    // Study it a little bit, and you'll see how Blockly works.
+<script type="module">
+  import * as Blockly from 'blockly';
+  import { pythonGenerator } from 'blockly/python';
+  import { connectToHub, sendCodeToHub } from './connect.js';
     const toolbox = {
       kind: 'categoryToolbox',
       contents: [
@@ -65,29 +55,61 @@
           ]
         },
         {
-        kind: 'category',
-        name: 'SPIKE Prime',
-        colour: '30',
-        contents: [
-        { kind: 'block', type: 'spike_motor_run' },
-        { kind: 'block', type: 'spike_wait' },
-        { kind: 'block', type: 'spike_print' },
-  ]
-},
-        
-    ]
+          kind: 'category',
+          name: 'SPIKE Prime',
+          colour: '30',
+          contents: [
+            { kind: 'block', type: 'spike_motor_run' },
+            { kind: 'block', type: 'spike_wait' },
+            { kind: 'block', type: 'spike_print' },
+          ]
+        },
+      ]
     };
 
     const workspace = Blockly.inject('blocklyDiv', {
       toolbox: toolbox,
       scrollbars: true,
       trashcan: false,
-      // I feel like a trash can is ugly and it's not in the SPIKE editor, so I don't want to include it.
     });
-// This puts Blockly into the workspace. Without it, we have a mostly blank screen.
 
+    window.workspace = workspace;
 
+    document.getElementById('codeBtn').addEventListener('click', () => {
+      try {
+        const code = pythonGenerator.workspaceToCode(workspace);
+        if (!code || code.trim() === '') {
+          alert('No blocks placed yet!');
+          return;
+        }
+        const win = window.open('', '_blank');
+        win.document.write('<pre style="font-size:14px;padding:20px;">' + code + '</pre>');
+      } catch (err) {
+        alert('Error generating code: ' + err.message);
+        console.error(err);
+      }
+    });
 
-    </script>
-    </body>
+    window.pythonGenerator = pythonGenerator;
+    window.workspace = workspace;
+
+    document.getElementById('connectBtn').addEventListener('click', async () => {
+      await window.connectToHub();
+    });
+
+    document.getElementById('sendBtn').addEventListener('click', async () => {
+      try {
+        const code = pythonGenerator.workspaceToCode(workspace);
+        if (!code || code.trim() === '') {
+          alert('No blocks placed yet!');
+          return;
+        }
+        await window.sendCodeToHub(code);
+      } catch (err) {
+        alert('Error: ' + err.message);
+        console.error(err);
+      }
+    });
+</script>
+</body>
 </html>

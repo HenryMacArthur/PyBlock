@@ -1,5 +1,6 @@
-// This file defines how the blocks work/what Python code they translate to.
-//To add new blocks, define their logic here and make them show up in the right place in the HTML file.
+import * as Blockly from 'blockly';
+import { pythonGenerator } from 'blockly/python';
+// These tell Blockly how the Blocks work
 Blockly.defineBlocksWithJsonArray([
   {
     "type": "spike_motor_run",
@@ -61,26 +62,39 @@ Blockly.defineBlocksWithJsonArray([
     "previousStatement": null,
     "nextStatement": null,
     "colour": 290,
-    "tooltip": "Prints a message (useful for debugging, useless without a terminal.)"
-    // Maybe we'll add a terminal later?
+    "tooltip": "Prints a message (useless without a terminal — maybe we'll add one later!)"
   }
-
 ]);
 
 
-// All of this stuff below translates the block code to Python. Maybe we should make this a separate file later.
-Blockly.Python['spike_motor_run'] = function(block) {
+
+// These generate Python
+//const pythonGenerator = pythonGenerator;
+// The line above was causing errors. Try uncommenting it stuff's not working and you don't know why
+pythonGenerator.forBlock['spike_motor_run'] = function(block) {
   const port = block.getFieldValue('PORT');
   const speed = block.getFieldValue('SPEED');
-  return `motor_${port.slice(-1).toLowerCase()} = Motor(${port})\nmotor_${port.slice(-1).toLowerCase()}.run(${speed})\n`;
+  const varName = `motor_${port.slice(-1).toLowerCase()}`;
+  return `${varName} = Motor(${port})\n${varName}.run(${speed})\n`;
 };
 
-Blockly.Python['spike_wait'] = function(block) {
+pythonGenerator.forBlock['spike_wait'] = function(block) {
   const seconds = block.getFieldValue('SECONDS');
   return `wait(${seconds * 1000})\n`;
 };
 
-Blockly.Python['spike_print'] = function(block) {
+pythonGenerator.forBlock['spike_print'] = function(block) {
   const message = block.getFieldValue('MESSAGE');
   return `print("${message}")\n`;
+};
+
+
+// These import initialization stuff that lets the PyBrick stuff do it's job
+const originalInit = pythonGenerator.init.bind(pythonGenerator);
+pythonGenerator.init = function(workspace) {
+  originalInit(workspace);
+  pythonGenerator.definitions_['import_motor']   = 'from pybricks.pupdevices import Motor';
+  pythonGenerator.definitions_['import_port']    = 'from pybricks.parameters import Port, Direction';
+  pythonGenerator.definitions_['import_tools']   = 'from pybricks.tools import wait';
+  pythonGenerator.definitions_['import_program'] = 'from pybricks import version';
 };

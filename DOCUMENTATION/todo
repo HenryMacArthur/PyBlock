@@ -1,6 +1,10 @@
 Things to do:
 
 - Make this work
-- add blocks
+- add more blocks
 - Make a stable release
     - after that's done, we need to make a desktop application. Using Electron should suffice.
+    - We also need to make a website. Sould be pretty simple.
+- Instead of loading Blockly externally, we should have it locally downloaded.
+- Make continuous scroll work, right now you have to select the tabs in the toolbox
+- Implement light/dark theme switching. Dark should be default.

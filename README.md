@@ -6,6 +6,8 @@ PyBricks is a great way to use MicroPython with robotics, but to use their block
 
 It's pretty simple. Drag block, upload code, press button, yay.
 
-# Note
+# Notes
 
 This currently does not work. 
+
+IMPORTANT: You can't run this by just opening the HTML file; it has to be ran through a localhost server.

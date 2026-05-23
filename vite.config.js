@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   // No WASM plugins needed here for pre-compiled static files!
   optimizeDeps: {
-    exclude: ['@pybricks/mpy-cross-v6']
+    include: ['blockly']
   },
   server: {
     fs: {
@@ -13,5 +13,12 @@ export default defineConfig({
       'Cross-Origin-Opener-Policy': 'same-origin',
       'Cross-Origin-Embedder-Policy': 'require-corp',
     }
-  }
+  },
+  build: {
+        commonjsOptions: {
+            include: [/blockly/, /node_modules/],
+        },
+    },
 });
+
+

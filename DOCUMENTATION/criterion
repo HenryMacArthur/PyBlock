@@ -1,0 +1,9 @@
+Criterion:
+    The user must be able to:
+        - Use blocks to code a program
+        - Use PyBlock to connect to a SPIKE Prime robot hub
+        - Export/save/import files
+        - Send the program to a robot, the program occupying 1 of 20 program slots
+        - Remotely run the program without relying on remote running to run the program
+        - Use PyBlock code to manipulate all motors in any possible way
+        - Use a REPL to remote-control the robot

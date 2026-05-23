@@ -1,0 +1,7 @@
+Index.html displays all the tools
+
+btns.js handles all the button logic
+
+connect.js handles establishing a bluetooth connection with the robot and sending files to it
+
+blocks.js stores all the Blockly blocks

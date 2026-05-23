@@ -1,115 +1,19 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>LiberPy</title>
-        <link rel="stylesheet" type="text/css" href="./styles.css">  
-        <script type="module" src="main.js"></script>
-    </head>
-    <body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PyBlock Editor</title>
+    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <script type="module" src="main.js"></script>
 
-<div id="toolbar">
-  <h1>SPIKE Coder</h1>
-  <button id="connectBtn">Connect Hub</button>
-  <button id="sendBtn">send to Hub</button>
-  <button id="codeBtn">See Python</button>
-  <span id="hubStatus" style="margin-left: 12px;">Not connected</span>
-</div>
+  </head>
+  <body>
+    <button id="generateBtn">Generate Code</button>
+    <!--Let's add CSS for this later-->
+<pre id="codeOutput"></pre>
 
-    <div id="blocklyDiv"></div>
-    <!--The Blockly stuff has to take up the rest of the editor, so that's why there's nothing else here-->
-    
-<script type="module">
-  import * as Blockly from 'blockly';
-  import { pythonGenerator } from 'blockly/python';
-  import { connectToHub, sendCodeToHub } from './connect.js';
-    const toolbox = {
-      kind: 'categoryToolbox',
-      contents: [
-        {
-          kind: 'category',
-          name: 'Logic',
-          colour: '210',
-          contents: [
-            { kind: 'block', type: 'controls_if' },
-            { kind: 'block', type: 'logic_boolean' },
-          ]
-        },
-        {
-          kind: 'category',
-          name: 'Loops',
-          colour: '120',
-          contents: [
-            { kind: 'block', type: 'controls_repeat_ext' },
-            { kind: 'block', type: 'controls_whileUntil' },
-          ]
-        },
-        {
-          kind: 'category',
-          name: 'Math',
-          colour: '230',
-          contents: [
-            { kind: 'block', type: 'math_number' },
-            { kind: 'block', type: 'math_arithmetic' },
-          ]
-        },
-        {
-          kind: 'category',
-          name: 'SPIKE Prime',
-          colour: '30',
-          contents: [
-            { kind: 'block', type: 'spike_motor_run' },
-            { kind: 'block', type: 'spike_wait' },
-            { kind: 'block', type: 'spike_print' },
-          ]
-        },
-      ]
-    };
 
-    const workspace = Blockly.inject('blocklyDiv', {
-      toolbox: toolbox,
-      scrollbars: true,
-      trashcan: false,
-    });
-
-    window.workspace = workspace;
-
-    document.getElementById('codeBtn').addEventListener('click', () => {
-      try {
-        const code = pythonGenerator.workspaceToCode(workspace);
-        if (!code || code.trim() === '') {
-          alert('No blocks placed yet!');
-          return;
-        }
-        const win = window.open('', '_blank');
-        win.document.write('<pre style="font-size:14px;padding:20px;">' + code + '</pre>');
-      } catch (err) {
-        alert('Error generating code: ' + err.message);
-        console.error(err);
-      }
-    });
-
-    window.pythonGenerator = pythonGenerator;
-    window.workspace = workspace;
-
-    document.getElementById('connectBtn').addEventListener('click', async () => {
-      await window.connectToHub();
-    });
-
-    document.getElementById('sendBtn').addEventListener('click', async () => {
-      try {
-        const code = pythonGenerator.workspaceToCode(workspace);
-        if (!code || code.trim() === '') {
-          alert('No blocks placed yet!');
-          return;
-        }
-        await window.sendCodeToHub(code);
-      } catch (err) {
-        alert('Error: ' + err.message);
-        console.error(err);
-      }
-    });
-</script>
-</body>
+    <div class="blocklyDiv"></div>
+  </body>
 </html>

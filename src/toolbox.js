@@ -1,21 +1,21 @@
 // toolbox.js
+// Assembles the sidebar toolbox from each block category's own definition.
+// To add a new category: create blocks/yourcategory.js, then add one
+// import + one entry here.
+
+import { toolboxCategory as logicCategory  } from './blocks/logic.js';
+import { toolboxCategory as loopsCategory  } from './blocks/loops.js';
+import { toolboxCategory as mathCategory   } from './blocks/math.js';
+import { toolboxCategory as spikeCategory  } from './blocks/spike.js';
+
 export const toolbox = {
     kind: 'categoryToolbox',
     contents: [
-        { kind: 'category', name: 'Logic',  colour: 210, contents: [
-            { kind: 'block', type: 'controls_if' },
-            { kind: 'block', type: 'logic_compare' },
-            { kind: 'block', type: 'logic_operation' },
-            { kind: 'block', type: 'logic_negate' },
-            { kind: 'block', type: 'logic_boolean' },
-        ]},
-        { kind: 'category', name: 'Loops', colour: 120, contents: [
-            { kind: 'block', type: 'controls_repeat_ext' },
-            { kind: 'block', type: 'controls_whileUntil' },
-        ]},
-        { kind: 'category', name: 'Math',  colour: 230, contents: [
-            { kind: 'block', type: 'math_number' },
-            { kind: 'block', type: 'math_arithmetic' },
-        ]},
-    ]
+        logicCategory,
+        loopsCategory,
+        mathCategory,
+        // spikeCategory currently doesn't have anything so we filter it out for now. 
+        // If spikeCategory is not showing, remove this
+        ...( spikeCategory ? [spikeCategory] : [] ),
+    ],
 };

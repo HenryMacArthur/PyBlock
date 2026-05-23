@@ -1,7 +1,17 @@
-// This is what gathers all the stuff from the other files in blocks/ and sends 'em to main.js
+// Gathers up all the categories in blocks/
+// If you add a new category, make sure you add it here
 
-import './logic.js';
-import './loops.js';
-import './math.js';
 
-// Add more above once you add more categories.
+import * as Blockly from 'blockly/core';
+
+import { blockDefs as logicDefs  } from './logic.js';
+import { blockDefs as loopsDefs  } from './loops.js';
+import { blockDefs as mathDefs   } from './math.js';
+import { blockDefs as spikeDefs  } from './spike.js';
+
+Blockly.defineBlocksWithJsonArray([
+    ...logicDefs,
+    ...loopsDefs,
+    ...mathDefs,
+    ...spikeDefs,
+]);

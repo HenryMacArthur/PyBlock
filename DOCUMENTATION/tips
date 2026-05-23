@@ -1,0 +1,5 @@
+Tips for developers:
+
+- Use Blockly Block Factory at https://raspberrypifoundation.github.io/blockly-samples/examples/developer-tools/index.html to make blocks, instead of writing them by hand
+
+- Make sure your new blocks are listed in their relative blocks/category.js, and index.js.

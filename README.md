@@ -6,6 +6,8 @@ PyBricks is a great way to use MicroPython with robotics, but to use their block
 
 It's pretty simple. Drag block, upload code, press button, yay.
 
+Right now, we haven't got SPIKE blocks working yet, but once we do, you can paste the generated Python into the PyBrick editor. We will also work on getting this thing to connect to the robot without needing the PyBricks editor.
+
 # Notes
 
 This currently is not usable for actual robotics.

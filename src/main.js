@@ -1,9 +1,11 @@
 // main.js
 import * as Blockly from 'blockly/core';
-import 'blockly/blocks';
+//import 'blockly/blocks';
+// That last line may have been causing some annoying useless warnings. Uncomment it if the blocks break or something.
 import 'blockly/msg/en';
-import { ContinuousToolbox, ContinuousFlyout, ContinuousMetrics } from '@blockly/continuous-toolbox';
+import { registerContinuousToolbox } from '@blockly/continuous-toolbox';
 //Continuous toolbox makes the toolbox work like the one in Scratch/SPIKE
+
 
 // that provides the words for the blocks. This one is for English. Without it, we would get blank blocks.
 import './blocks/index.js';
@@ -14,21 +16,7 @@ import { pybricksGenerator } from './generator.js';
 
 
 // You have to register Blockly plugins before you inject them
-Blockly.registry.register(
-  Blockly.registry.Type.TOOLBOX,
-  'ContinuousToolbox',
-  ContinuousToolbox
-);
-Blockly.registry.register(
-  Blockly.registry.Type.FLYOUT,
-  'ContinuousFlyout',
-  ContinuousFlyout
-);
-Blockly.registry.register(
-  Blockly.registry.Type.METRICS_MANAGER,
-  'ContinuousMetrics',
-  ContinuousMetrics
-);
+registerContinuousToolbox();
 
 const workspace = Blockly.inject(document.querySelector('.blocklyDiv'), {
     toolbox,
@@ -56,6 +44,7 @@ const workspace = Blockly.inject(document.querySelector('.blocklyDiv'), {
     /* The trashcan looks kinda ugly*/
     theme: Blockly.Themes.Classic,
     renderer: 'zelos',
+    recyclingEnabled: false
 
 
 

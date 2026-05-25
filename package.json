@@ -30,6 +30,7 @@
     "vite-plugin-wasm": "^3.6.0"
   },
   "dependencies": {
+    "@blockly/block-shareable-procedures": "^6.0.12",
     "@blockly/continuous-toolbox": "^7.0.9",
     "blockly": "^12.5.1"
   }

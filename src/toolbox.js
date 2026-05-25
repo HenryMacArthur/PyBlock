@@ -14,8 +14,6 @@ export const toolbox = {
         logicCategory,
         loopsCategory,
         mathCategory,
-        // spikeCategory currently doesn't have anything so we filter it out for now. 
-        // If spikeCategory is not showing, remove this
-        ...( spikeCategory ? [spikeCategory] : [] ),
+        spikeCategory,
     ],
 };

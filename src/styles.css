@@ -3,6 +3,15 @@
   margin: 0;
   padding: 0;
 }
+.CodeBtnCenterDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.GenCodeBtn {
+  padding: 10px;
+  background: #ab0fbc;
+}
 
 html, body {
   width: 100%;
@@ -15,6 +24,8 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+  font-family: 'Hack', monospace;
+
 }
 
 /* Header bar */
@@ -39,25 +50,15 @@ body::before {
   height: calc(100vh - 44px);
 }
 
-/* Blockly overrides — lighten the workspace background */
-.blocklyMainBackground {
-  fill: #1e2a45 !important;
-}
 
+
+
+
+/* Remove what you added before and replace with this */
 .blocklyToolboxDiv {
-  background: #16213e !important;
-  border-right: 1px solid #e2b96f33 !important;
-}
-
-.blocklyTreeLabel {
-  color: #2e3034 !important;
-}
-
-.blocklyTreeRow:hover .blocklyTreeLabel,
-.blocklyTreeSelected .blocklyTreeLabel {
-  color: #333333 !important;
-}
-
-.blocklyTreeSelected {
-  background-color: #e2b96f22 !important;
+    position: fixed !important;
+    top: 44px !important;  /* matches your header height */
+    left: 0;
+    z-index: 10;
+    height: calc(100vh - 44px) !important;
 }

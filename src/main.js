@@ -2,6 +2,9 @@
 import * as Blockly from 'blockly/core';
 import 'blockly/blocks';
 import 'blockly/msg/en';
+import { ContinuousToolbox, ContinuousFlyout, ContinuousMetrics } from '@blockly/continuous-toolbox';
+//Continuous toolbox makes the toolbox work like the one in Scratch/SPIKE
+
 // that provides the words for the blocks. This one is for English. Without it, we would get blank blocks.
 import './blocks/index.js';
 // Index.js is what gathers all the block categories and sends them to this
@@ -10,13 +13,34 @@ import { toolbox } from './toolbox.js';
 import { pybricksGenerator } from './generator.js';
 
 
-
+// You have to register Blockly plugins before you inject them
+Blockly.registry.register(
+  Blockly.registry.Type.TOOLBOX,
+  'ContinuousToolbox',
+  ContinuousToolbox
+);
+Blockly.registry.register(
+  Blockly.registry.Type.FLYOUT,
+  'ContinuousFlyout',
+  ContinuousFlyout
+);
+Blockly.registry.register(
+  Blockly.registry.Type.METRICS_MANAGER,
+  'ContinuousMetrics',
+  ContinuousMetrics
+);
 
 const workspace = Blockly.inject(document.querySelector('.blocklyDiv'), {
     toolbox,
+
+    plugins: {
+        toolbox: 'ContinuousToolbox',
+        flyoutsVerticalToolbox: 'ContinuousFlyout',
+        metricsManager: 'ContinuousMetrics',
+    },
     grid: {
         spacing: 20,
-        length: 3,
+        length: 0.5,
         colour: '#ccc',
         snap: true,
     },
@@ -28,9 +52,19 @@ const workspace = Blockly.inject(document.querySelector('.blocklyDiv'), {
         minScale: 0.3,
         scaleSpeed: 1.2,
     },
-    trashcan: true,
+    trashcan: false,
+    /* The trashcan looks kinda ugly*/
     theme: Blockly.Themes.Classic,
+    renderer: 'zelos',
+
+
+
+        
 });
+document.querySelector('.blocklyToolboxDiv')?.addEventListener('wheel', (e) => {
+    e.stopPropagation();
+}, { passive: false });
+
 
 window.addEventListener('resize', () => {
     Blockly.svgResize(workspace);
@@ -44,6 +78,6 @@ document.getElementById('generateBtn').addEventListener('click', () => {
     tab.document.write(`<pre>${code}</pre>`);
     tab.document.close();
 });
-// Currently that doesn't do anything if there's no code in the workspace,
+// Currently that just gives you a blank tab if there's no code in the workspace,
 // So we should probably make it do something, like give you Python that looks like # No code yet
 // Or give you an alert

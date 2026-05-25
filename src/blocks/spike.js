@@ -23,7 +23,7 @@ export const blockDefs = [
 export function registerGenerators(gen, Order) {
     // Add generators here.
      gen.forBlock['spike_motor_run'] = function (block) {
-         gen.definitions_['import_motor'] = 'from pybricks.pupdevices import Motor';
+         gen.definitions_['import_motor'] = 'from pybricks.pupdevices import Motor '
          // What needs to be imported to make the block work
          const port  = block.getFieldValue('PORT');
          const speed = gen.valueToCode(block, 'SPEED', Order.NONE) || '0';

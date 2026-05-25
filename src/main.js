@@ -50,6 +50,8 @@ const workspace = Blockly.inject(document.querySelector('.blocklyDiv'), {
 
         
 });
+
+
 document.querySelector('.blocklyToolboxDiv')?.addEventListener('wheel', (e) => {
     e.stopPropagation();
 }, { passive: false });
@@ -70,3 +72,14 @@ document.getElementById('generateBtn').addEventListener('click', () => {
 // Currently that just gives you a blank tab if there's no code in the workspace,
 // So we should probably make it do something, like give you Python that looks like # No code yet
 // Or give you an alert
+
+
+workspace.addChangeListener((event) => {
+    if (event.type === Blockly.Events.VIEWPORT_CHANGE) {
+        const flyout = workspace.getFlyout();
+        if (flyout) {
+            const flyoutWorkspace = flyout.getWorkspace();
+            flyoutWorkspace.setScale(1); // lock flyout zoom to 1x always
+        }
+    }
+});

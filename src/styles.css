@@ -54,11 +54,11 @@ body::before {
 
 
 
-/* Remove what you added before and replace with this */
 .blocklyToolboxDiv {
-    position: fixed !important;
-    top: 44px !important;  /* matches your header height */
-    left: 0;
-    z-index: 10;
-    height: calc(100vh - 44px) !important;
+    width: 250px !important;
+    min-width: 250px !important;
+    max-width: 250px !important;
 }
+
+
+/* best width is around 390px wide for the toolbar, but IDK how to implement that */

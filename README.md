@@ -10,6 +10,8 @@ Right now, we haven't got SPIKE blocks working yet, but once we do, you can past
 
 # Notes
 
+To handle multiple files, we're going to have to keep all programs bundled together, instead of managing them individually like SPIKE does. We're also going to need to keep track of which program slot (0-19) the user has assigned them, and download the entire 20 files (plus main.py, which manages the whole thing) every time.
+
 This currently is not usable for actual robotics.
 
 IMPORTANT: You can't run this by just opening the HTML file; it has to be ran through a localhost server.

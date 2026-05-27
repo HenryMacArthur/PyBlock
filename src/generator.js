@@ -30,7 +30,7 @@ registerLoops(pybricksGenerator, Order);
 registerMath(pybricksGenerator, Order);
 registerSpike(pybricksGenerator, Order);
 
-// How to make more PyBricks blockss.
+// How to make more PyBricks blocks.
 // 1. Create blocks/yourcategory.js with blockDefs, registerGenerators,
 //    and toolboxCategory, following the same pattern as the files above.
 // 2. Add one import + one call here (registerYours).

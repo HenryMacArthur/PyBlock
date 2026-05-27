@@ -1,13 +1,13 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  // No WASM plugins needed here for pre-compiled static files!
+  base: '/PyBlock/',
   optimizeDeps: {
     include: ['blockly']
   },
   server: {
     fs: {
-      strict: false 
+      strict: false
     },
     headers: {
       'Cross-Origin-Opener-Policy': 'same-origin',
@@ -15,10 +15,9 @@ export default defineConfig({
     }
   },
   build: {
-        commonjsOptions: {
-            include: [/blockly/, /node_modules/],
-        },
+    commonjsOptions: {
+      include: [/blockly/, /node_modules/],
     },
+  },
 });
-
 

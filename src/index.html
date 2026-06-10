@@ -6,16 +6,49 @@
     <!--A font very close to the one FreeCodeCamp uses. One of my favorites.-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PyBlock Editor</title>
-      <link rel="icon" type="image/svg+xml" href="public\favicon.svg" />
+      <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" type="text/css" href="./styles.css">
     <script type="module" src="main.js"></script>
 
   </head>
   <body>
-   <div class = "GenCodeCenterDiv">
-    <button class = "GenCodeBtn" id="generateBtn">Generate Code</button>
-<pre id="codeOutput"></pre>
+
+      <div class="header">
+                    <div class="headerTitle">PyBlock</div>
+
+        <div class = "GenCodeCenterDiv">
+            <button class = "GenCodeBtn" id="generateBtn">Generate Code</button>
+            <pre id="codeOutput"></pre>
+        </div>
+<!-- Help Button -->
+<button class= "help-btn" onclick="document.getElementById('overlay').classList.add('active')">
+  HELP
+</button>
+
+<!-- Overlay + Popup -->
+<div id="overlay" class="overlay" onclick="if(event.target===this) closePopup()">
+  <div class="popup" role="dialog" aria-modal="true">
+    <button class="close-btn" onclick="closePopup()">✕</button>
+    <h3>HELP</h3>
+    <p>HELP MEEEEEEE</p>
+    <button onclick="closePopup()">2+2=5</button>
+    <!--I can't be bothered to add the actual content right now.-->
+  </div>
 </div>
+
+
+
+<script>
+  // I don't wanna have a separate file for this cuz it's just 7 lines
+  function closePopup() {
+    document.getElementById('overlay').classList.remove('active');
+  }
+  // Close on Escape key
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePopup();
+  });
+</script>
+
 
     <div class="blocklyDiv"></div>
   </body>

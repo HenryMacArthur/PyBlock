@@ -5,6 +5,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['blockly']
   },
+  
   server: {
     fs: {
       strict: false

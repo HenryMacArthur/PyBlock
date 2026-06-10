@@ -8,11 +8,13 @@
   justify-content: center;
   align-items: center;
 }
+
 .GenCodeBtn {
   padding: 10px;
   background: #ab0fbc;
+  border-radius: 10px;
 }
-
+ 
 html, body {
   width: 100%;
   height: 100%;
@@ -24,41 +26,112 @@ html, body {
 body {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
   font-family: 'Hack', monospace;
 
 }
 
-/* Header bar */
-body::before {
-  content: 'PyBlock';
-  display: block;
-  height: 44px;
-  line-height: 44px;
-  padding: 0 20px;
-  background: #16213e;
-  color: #303030;
-  font-size: 1.1rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  border-bottom: 2px solid #e2b96f33;
-  flex-shrink: 0;
-}
 
 .blocklyDiv {
   flex: 1;
   width: 100%;
-  height: calc(100vh - 44px);
+  height: 100%;
 }
-
-
-
-
 
 .blocklyToolboxDiv {
     width: 250px !important;
-    min-width: 250px !important;
+    /*min-width: 250px !important;
     max-width: 250px !important;
+    */
+
+    /* Comment/uncomment that if the toolbox is breaking */
 }
 
+.header{
+  padding: 15px;
+  background: #7507b1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
 
+}
+
+.GenCodeCenterDiv {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.dialog-div{
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  
+}
+dialog {
+  dialog {
+  /* 1. Fixes it to the center of the viewport */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  
+  /* 2. Resets browser default margins that might interfere */
+  margin: 0; 
+  
+  /* 3. Optional visual styling */
+  padding: 24px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 400px; /* Prevents it from getting too wide on desktop */
+}
+}
+
+/* Styles the dimmed background behind the popup */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.headerTitle {
+  color: #FFFFFF;
+  font-weight: 700;
+  margin-right: 8px;
+  font-size: 18px;
+}
 /* best width is around 390px wide for the toolbar, but IDK how to implement that */
+
+/* This stuff is for the help popup button. */
+
+
+
+/* Hours spent trying to make the CSS work: 1 */
+  .overlay {
+    display: none;
+    position: fixed;         /* fixed = covers the whole page */
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+  }
+  .overlay.active { display: flex; }
+
+  .popup {
+    background: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    width: 360px;
+    max-width: 90%;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  }
+
+  .close-btn {
+    position: absolute; top: 12px; right: 16px;
+    background: none; border: none; font-size: 18px;
+    cursor: pointer; color: #888;
+  }

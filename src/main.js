@@ -62,6 +62,7 @@ window.addEventListener('resize', () => {
 });
 
 
+
 document.getElementById('generateBtn').addEventListener('click', () => {
     const code = pybricksGenerator.workspaceToCode(workspace);
     const tab = window.open('', '_blank');
